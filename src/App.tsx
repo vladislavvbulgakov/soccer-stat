@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MantineProvider } from "@mantine/core";
 import { ToastContainer } from "react-toastify";
 import { AppRouter } from "@/app/router/AppRouter";
-import "@mantine/core/styles.css";
+// import "@mantine/core/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient({

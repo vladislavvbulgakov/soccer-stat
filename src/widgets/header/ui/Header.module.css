@@ -1,0 +1,42 @@
+.header {
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.inner {
+  margin: 0 auto;
+  padding: 21px 16px 5px;
+  height: 103px;
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 66px;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  color: #000000;
+  line-height: 50px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #1a1a1a;
+}
+
+.active {
+  border-bottom: 5px solid #116acc;
+}
