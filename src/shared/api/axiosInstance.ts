@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://api.football-data.org/v4",
+  baseURL: "/",
   headers: {
     "X-Auth-Token": import.meta.env.VITE_API_TOKEN,
   },

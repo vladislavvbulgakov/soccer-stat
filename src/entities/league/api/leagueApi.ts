@@ -3,7 +3,7 @@ import type { CompetitionsResponse } from "../model/types";
 import type { CompetitionMatchesResponse } from "@/entities/match/model/types";
 
 export const getCompetitions = () => {
-  return http.get<CompetitionsResponse>("/competitions");
+  return http.get<CompetitionsResponse>("/api/competitions");
 };
 
 export const getCompetitionMatches = (
@@ -11,7 +11,7 @@ export const getCompetitionMatches = (
   params?: { dateFrom?: string; dateTo?: string },
 ) => {
   return http.get<CompetitionMatchesResponse>(
-    `/competitions/${id}/matches`,
+    `/api/competitions/${id}/matches`,
     params,
   );
 };
