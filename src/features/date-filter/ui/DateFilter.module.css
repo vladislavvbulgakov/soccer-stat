@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.label,
+.separator {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 220px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: #ffffff;
+  color: #000000;
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.input:hover {
+  border-color: #9ca3af;
+}
+
+.input:focus {
+  border-color: #2a59fe;
+  box-shadow: 0 0 0 2px rgba(42, 89, 254, 0.15);
+}

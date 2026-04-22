@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 16px;
+
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.link {
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #2a59fe;
+}
+
+.current {
+  color: #111827;
+  cursor: default;
+}
+
+.separator {
+  color: #9ca3af;
+  user-select: none;
+}

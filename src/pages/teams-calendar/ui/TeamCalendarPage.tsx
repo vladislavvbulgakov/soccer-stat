@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+
 import { Wrapper } from "@/shared/ui/Wrapper/Wrapper";
 import Breadcrumbs from "@/shared/ui/Breadcrumbs/Breadcrumbs";
 import DateFilter from "@/features/date-filter/ui/DateFilter";
 import Pagination from "@/features/pagination/ui/Pagination";
 import MatchesTable from "@/widgets/matches-table/ui/MatchesTable";
 import type { MatchItem } from "@/widgets/matches-table/model/types";
-import { getCompetitionMatches } from "@/entities/league/api/leagueApi";
+import { getTeam, getTeamMatches } from "@/entities/team/api/teamApi";
+import type { TeamMatchesResponse } from "@/entities/team/model/types";
 
 const PAGE_SIZE = 10;
 
-const LeagueCalendarPage = () => {
+const TeamCalendarPage = () => {
   const { id } = useParams<{ id: string }>();
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
@@ -20,9 +22,15 @@ const LeagueCalendarPage = () => {
 
   const params = dateFrom && dateTo ? { dateFrom, dateTo } : undefined;
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["competition-matches", id, dateFrom, dateTo],
-    queryFn: () => getCompetitionMatches(Number(id), params),
+  const { data: teamData } = useQuery({
+    queryKey: ["team", id],
+    queryFn: () => getTeam(Number(id)),
+    enabled: !!id,
+  });
+
+  const { data, isLoading, isError } = useQuery<TeamMatchesResponse>({
+    queryKey: ["team-matches", id, dateFrom, dateTo],
+    queryFn: () => getTeamMatches(Number(id), params),
     enabled: !!id,
   });
   useEffect(() => {
@@ -30,7 +38,7 @@ const LeagueCalendarPage = () => {
       toast.error("Данные не получены. Превышен лимит запросов к API.");
     }
   }, [isError]);
-  const matches: MatchItem[] = (data?.matches ?? []).map((m: any) => ({
+  const matches: MatchItem[] = (data?.matches ?? []).map((m) => ({
     id: m.id,
     utcDate: m.utcDate,
     status: m.status,
@@ -56,7 +64,7 @@ const LeagueCalendarPage = () => {
     },
   }));
 
-  const leagueName = data?.competition?.name ?? "Лига";
+  const teamName = teamData?.name ?? "Команда";
   const totalPages = Math.ceil(matches.length / PAGE_SIZE);
   const paginated = matches.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
@@ -73,7 +81,7 @@ const LeagueCalendarPage = () => {
   return (
     <Wrapper>
       <Breadcrumbs
-        items={[{ label: "Лиги", to: "/" }, { label: leagueName }]}
+        items={[{ label: "Команды", to: "/teams" }, { label: teamName }]}
       />
       <DateFilter
         dateFrom={dateFrom}
@@ -95,4 +103,4 @@ const LeagueCalendarPage = () => {
   );
 };
 
-export default LeagueCalendarPage;
+export default TeamCalendarPage;
