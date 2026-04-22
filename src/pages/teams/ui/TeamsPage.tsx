@@ -9,7 +9,7 @@ import EntityGrid from "@/widgets/entity-grid/ui/EntityGrid";
 import type { EntityItem } from "@/widgets/entity-grid/model/types";
 import { getTeams } from "@/entities/team/api/teamApi";
 
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 12;
 
 const TeamsPage = () => {
   const navigate = useNavigate();

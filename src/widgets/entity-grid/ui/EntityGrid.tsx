@@ -1,5 +1,6 @@
 import styles from "./EntityGrid.module.css";
 import type { EntityGridProps } from "../model/types";
+import EntityCard from "@/shared/ui/EntityCard/EntityCard";
 
 const SkeletonCard = () => (
   <div className={styles.skeletonCard}>
@@ -23,30 +24,13 @@ const EntityGrid = ({ items, onItemClick, isLoading }: EntityGridProps) => {
   return (
     <div className={styles.grid}>
       {items.map((item) => (
-        <button
+        <EntityCard
           key={item.id}
-          className={styles.card}
+          name={item.name}
+          emblem={item.emblem}
+          subtitle={item.subtitle}
           onClick={() => onItemClick(item.id)}
-        >
-          <div className={styles.logoWrapper}>
-            {item.emblem ? (
-              <img
-                src={item.emblem}
-                alt={item.name}
-                className={styles.logo}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
-            ) : (
-              <div className={styles.logoFallback}>{item.name.charAt(0)}</div>
-            )}
-          </div>
-          <span className={styles.name}>{item.name}</span>
-          {item.subtitle && (
-            <span className={styles.subtitle}>{item.subtitle}</span>
-          )}
-        </button>
+        />
       ))}
     </div>
   );

@@ -10,7 +10,7 @@ import type { EntityItem } from "@/widgets/entity-grid/model/types";
 import { getCompetitions } from "@/entities/league/api/leagueApi";
 import type { CompetitionsResponse } from "@/entities/league/model/types";
 
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 12;
 
 const LeaguesPage = () => {
   const navigate = useNavigate();
