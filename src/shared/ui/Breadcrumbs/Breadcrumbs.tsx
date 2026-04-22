@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Breadcrumbs.module.css";
+import React from "react";
 
 export interface BreadcrumbItem {
   label: string;
@@ -16,7 +17,7 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
         return (
-          <>
+          <React.Fragment key={index}>
             {index > 0 && <span className={styles.separator}>›</span>}
             {item.to && !isLast ? (
               <Link to={item.to} className={styles.link}>
@@ -27,7 +28,7 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
                 {item.label}
               </span>
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </nav>

@@ -18,8 +18,21 @@ const LeagueCalendarPage = () => {
   const [dateTo, setDateTo] = useState("");
   const [page, setPage] = useState(1);
 
-  const params = dateFrom && dateTo ? { dateFrom, dateTo } : undefined;
+  let params:
+    | {
+        date?: string;
+        dateFrom?: string;
+        dateTo?: string;
+      }
+    | undefined;
 
+  if (dateFrom && dateTo) {
+    params = { dateFrom, dateTo };
+  } else if (dateFrom || dateTo) {
+    params = { date: dateFrom || dateTo };
+  } else {
+    params = undefined;
+  }
   const { data, isLoading, isError } = useQuery({
     queryKey: ["competition-matches", id, dateFrom, dateTo],
     queryFn: () => getCompetitionMatches(Number(id), params),
@@ -27,9 +40,10 @@ const LeagueCalendarPage = () => {
   });
   useEffect(() => {
     if (isError) {
-      toast.error("Данные не получены. Превышен лимит запросов к API.");
+      toast.error("Данные не получены");
     }
   }, [isError]);
+
   const matches: MatchItem[] = (data?.matches ?? []).map((m: any) => ({
     id: m.id,
     utcDate: m.utcDate,
@@ -38,19 +52,19 @@ const LeagueCalendarPage = () => {
     awayTeam: { name: m.awayTeam.name },
     score: {
       fullTime: {
-        homeTeam: m.score?.fullTime?.homeTeam ?? null,
-        awayTeam: m.score?.fullTime?.awayTeam ?? null,
+        homeTeam: m.score?.fullTime?.home ?? null,
+        awayTeam: m.score?.fullTime?.away ?? null,
       },
       extraTime: m.score?.extraTime
         ? {
-            homeTeam: m.score.extraTime.homeTeam ?? null,
-            awayTeam: m.score.extraTime.awayTeam ?? null,
+            homeTeam: m.score.extraTime.home ?? null,
+            awayTeam: m.score.extraTime.away ?? null,
           }
         : undefined,
       penalties: m.score?.penalties
         ? {
-            homeTeam: m.score.penalties.homeTeam ?? null,
-            awayTeam: m.score.penalties.awayTeam ?? null,
+            homeTeam: m.score.penalties.home ?? null,
+            awayTeam: m.score.penalties.away ?? null,
           }
         : undefined,
     },

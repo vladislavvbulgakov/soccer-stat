@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MantineProvider } from "@mantine/core";
 import { ToastContainer } from "react-toastify";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AppRouter } from "@/app/router/AppRouter";
 import "@mantine/core/styles.css";
 import "@/app/styles/global.css";
@@ -20,6 +21,7 @@ const App = () => (
     <MantineProvider>
       <AppRouter />
       <ToastContainer position="top-right" autoClose={3500} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </MantineProvider>
   </QueryClientProvider>
 );

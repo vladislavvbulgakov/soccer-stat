@@ -4,12 +4,23 @@ export interface ApiMatch {
   id: number;
   utcDate: string;
   status: MatchStatus;
+
   homeTeam: { name: string };
   awayTeam: { name: string };
+
   score: {
-    fullTime: { homeTeam: number | null; awayTeam: number | null };
-    extraTime?: { homeTeam: number | null; awayTeam: number | null };
-    penalties?: { homeTeam: number | null; awayTeam: number | null };
+    fullTime: {
+      home: number | null;
+      away: number | null;
+    };
+    extraTime?: {
+      home: number | null;
+      away: number | null;
+    };
+    penalties?: {
+      home: number | null;
+      away: number | null;
+    };
   };
 }
 export interface TeamMatchesResponse {

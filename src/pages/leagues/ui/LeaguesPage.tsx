@@ -23,7 +23,7 @@ const LeaguesPage = () => {
   });
   useEffect(() => {
     if (isError) {
-      toast.error("Данные не получены. Превышен лимит запросов к API.", {
+      toast.error("Данные не получены", {
         toastId: "competitions-error",
       });
     }
