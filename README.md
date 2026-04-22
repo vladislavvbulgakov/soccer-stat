@@ -128,21 +128,6 @@ http://localhost:5173
 
 ---
 
-## Сборка проекта
-
-```bash
-npm run build
-```
-
----
-
-## Просмотр production-сборки
-
-```bash
-npm run preview
-```
-
-
 ## Прокси
 
 В проекте настроен прокси (Vite), чтобы избежать CORS:
